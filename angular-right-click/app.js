@@ -23,7 +23,7 @@ angular
                 data: 'the data !'
             },
         ]
-
+        
         self.menuOptions = 
         [
             {
@@ -47,6 +47,14 @@ angular
             {
                 label: 'Remove',
                 onClick: menuRemove
+            }
+        ]
+        
+        self.anotherMenuOptions = 
+        [
+            {
+                label: 'Different Menu',      // menu option label
+                onClick: menuSave   // on click handler
             }
         ]
 
