@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in app.items">
-                <td>{{item.name}}</td>
+                <td sh-context-menu menu-options="app.anotherMenuOptions">{{item.name}}</td>
                 <td sh-context-menu menu-options="app.menuOptions" context-data="item">{{item.data}}</td>
             </tr>
         </tbody>
