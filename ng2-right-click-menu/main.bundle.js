@@ -51,6 +51,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+// import { IShContextMenuItem } from '../../../context-menu/src/sh-context-item';
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Right Click Me';
@@ -62,12 +63,39 @@ var AppComponent = (function () {
         };
         this.items = [
             {
-                label: 'Save',
+                label: 'Save Me On Your HD',
                 onClick: this.clickEvent
             },
             {
                 label: 'Edit',
                 onClick: this.clickEvent
+            },
+            {
+                label: 'Sub Menu',
+                subMenu: true,
+                subMenuItems: [
+                    {
+                        label: 'Save',
+                        onClick: this.clickEvent
+                    },
+                    {
+                        label: 'Edit',
+                        onClick: this.clickEvent
+                    },
+                    {
+                        label: 'Another Sub Menu',
+                        subMenu: true,
+                        subMenuItems: [
+                            {
+                                label: 'Save',
+                                onClick: this.clickEvent
+                            },
+                            {
+                                label: 'Edit',
+                                onClick: this.clickEvent
+                            }]
+                    }
+                ]
             },
             {
                 divider: true
@@ -93,9 +121,9 @@ var AppComponent = (function () {
     };
     ;
     AppComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(403),
+            template: __webpack_require__(405),
             styles: [__webpack_require__(399)]
         }), 
         __metadata('design:paramtypes', [])
@@ -110,9 +138,9 @@ var AppComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu__ = __webpack_require__(400);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu___ = __webpack_require__(400);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(343);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -138,7 +166,7 @@ var AppModule = (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu__["a" /* ShContextMenuModule */]
+                __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu___["a" /* ShContextMenuModule */]
             ],
             providers: [],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
@@ -185,14 +213,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 403:
+/***/ 405:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxOne\">\n  <h2>{{title}}</h2>\n</div>\n<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxTwo\">\n  <h2>{{title}}</h2>\n</div>\n"
 
 /***/ }),
 
-/***/ 413:
+/***/ 415:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(245);
@@ -200,5 +228,5 @@ module.exports = __webpack_require__(245);
 
 /***/ })
 
-},[413]);
+},[415]);
 //# sourceMappingURL=main.bundle.js.map
