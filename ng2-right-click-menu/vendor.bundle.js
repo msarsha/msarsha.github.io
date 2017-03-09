@@ -32529,8 +32529,8 @@ __decorate([
 ShContextMenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Component */])({
         selector: 'sh-context-menu',
-        template: "\n    <div class=\"sh-context--container\"\n      [style.left]=\"position.left\"\n      [style.top]=\"position.top\">\n      <ul>\n          <li *ngFor=\"let item of items\"\n            [ngClass]=\"{'sh-menu-item': !item.divider, 'sh-context-divider': item.divider, 'sh-menu-disabled': isItemDisabled(item), 'sh-menu-hidden': !isItemVisible(item)}\"\n            (click)=\"onClick(item)\">\n              <div *ngIf=\"!item.divider && !item.subMenu\">\n                  {{item.label}}\n              </div>\n              <div *ngIf=\"item.subMenu\"\n                [sh-context-sub-menu]=\"item.subMenuItems\"\n                [sh-data-context]=\"dataContext\"\n                (closeSubMenu)=\"close()\">\n                  {{item.label}} <span style=\"float: right;\"> > </span>\n              </div>\n          </li>\n      </ul>\n    </div>\n",
-        styles: ["\n  .sh-context--container{\n    font-family: sans-serif;\n    position: fixed;\n    background: #ececec;\n    min-width: 150px;\n    border: 1px solid rgba(0,0,0,0.2);\n    border-radius: 3px;\n    box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);\n    z-index: 100;\n    color: black;\n  }\n\n  .sh-context--container ul{\n    list-style: none;\n    padding: 5px 0;\n    margin: 0;\n  }\n\n  .sh-context--container ul li{\n      padding: 5px 10px 5px 15px;\n      transition: all 0.15s;\n  }\n\n  .sh-context--container ul li.sh-context-divider{\n      height: 1px;\n      margin: 1px 1px 8px 1px;\n      overflow: hidden;\n      background-color: #ececec;\n      border-bottom: 1px solid #d0d0d0;\n      line-height: 10px;\n    }\n\n  .sh-context--container ul li.sh-menu-item:hover{\n      cursor: pointer;\n      background: #4b8bec;\n      color: white;\n  }\n\n  .sh-context--container ul li.sh-menu-disabled{\n      color: #d0d0d0;\n   }\n\n   .sh-context--container ul li.sh-menu-item.sh-menu-hidden{\n      display: none;\n   }\n\n  .sh-context--container ul li.sh-menu-disabled:hover{\n      cursor: not-allowed;\n      color: #d0d0d0;\n      background: #ececec;\n  }\n"]
+        template: "\n    <div class=\"sh-context--container\"\n      [style.left]=\"position.left\"\n      [style.top]=\"position.top\">\n      <ul>\n          <li *ngFor=\"let item of items\"\n            [ngClass]=\"{'sh-menu-item': !item.divider, 'sh-context-divider': item.divider, 'sh-menu-disabled': isItemDisabled(item), 'sh-menu-hidden': !isItemVisible(item)}\"\n            (click)=\"onClick(item)\">\n              <div *ngIf=\"!item.divider && !item.subMenu\">\n                  {{item.label}}\n              </div>\n              <div *ngIf=\"item.subMenu\"\n                [sh-context-sub-menu]=\"item.subMenuItems\"\n                [sh-data-context]=\"dataContext\"\n                (closeSubMenu)=\"close()\">\n                  {{item.label}} <div class=\"right-arrow\"></div>\n              </div>\n          </li>\n      </ul>\n    </div>\n",
+        styles: ["\n  .sh-context--container{\n    font-family: sans-serif;\n    position: fixed;\n    background: #ececec;\n    min-width: 150px;\n    border: 1px solid rgba(0,0,0,0.2);\n    border-radius: 3px;\n    box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);\n    z-index: 100;\n    color: black;\n  }\n\n  .sh-context--container ul{\n    list-style: none;\n    padding: 5px 0;\n    margin: 0;\n  }\n\n  .sh-context--container ul li{\n      padding: 5px 10px 5px 15px;\n      transition: all 0.15s;\n  }\n\n  .sh-context--container ul li.sh-context-divider{\n      height: 1px;\n      margin: 1px 1px 8px 1px;\n      overflow: hidden;\n      background-color: #ececec;\n      border-bottom: 1px solid #d0d0d0;\n      line-height: 10px;\n    }\n\n  .sh-context--container ul li.sh-menu-item:hover{\n      cursor: pointer;\n      background: #4b8bec;\n      color: white;\n  }\n\n  .sh-context--container ul li.sh-menu-disabled{\n      color: #d0d0d0;\n   }\n\n   .sh-context--container ul li.sh-menu-item.sh-menu-hidden{\n      display: none;\n   }\n\n  .sh-context--container ul li.sh-menu-disabled:hover{\n      cursor: not-allowed;\n      color: #d0d0d0;\n      background: #ececec;\n  }\n\n  .right-arrow{\n    float: right;\n    margin-left: 10px;\n    margin-top: 3px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n    border-left: 8px solid black;\n  }\n"]
     })
 ], ShContextMenuComponent);
 
@@ -62308,7 +62308,7 @@ var ShContextSubMenuDirective = (function () {
         this.ctxComponent = this.createContextComponent();
         this.registerBindings();
         this.registerEvents();
-        this.setLocation(event);
+        this.setLocation();
         return false;
     };
     ShContextSubMenuDirective.prototype.registerEvents = function () {
@@ -62326,7 +62326,7 @@ var ShContextSubMenuDirective = (function () {
         var shContextComponentRef = this.viewRef.createComponent(shContextMenuFactory);
         return shContextComponentRef;
     };
-    ShContextSubMenuDirective.prototype.setLocation = function (event) {
+    ShContextSubMenuDirective.prototype.setLocation = function () {
         var elmRect = this.elmRef.nativeElement.getClientRects()[0];
         var position = {
             top: elmRect.top + 'px',
