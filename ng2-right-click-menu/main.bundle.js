@@ -1,6 +1,6 @@
 webpackJsonp([1,4],{
 
-/***/ 244:
+/***/ 245:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -9,20 +9,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 244;
+webpackEmptyContext.id = 245;
 
 
 /***/ }),
 
-/***/ 245:
+/***/ 246:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(323);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(344);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(346);
 
 
 
@@ -35,7 +35,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 343:
+/***/ 344:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52,9 +52,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 // import { IShContextMenuItem } from '../../../context-menu/src/sh-context-item';
+// import { IShContextOptions } from '../../../context-menu/src/sh-context-options';
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Right Click Me';
+        this.titleRtl = 'Right Click Me (RTL)';
         this.dataCtxOne = {
             One: 'One'
         };
@@ -115,6 +117,46 @@ var AppComponent = (function () {
                 }
             }
         ];
+        this.itemsRtl = [
+            {
+                label: 'שמור',
+                onClick: this.clickEvent
+            },
+            {
+                label: 'ערוך',
+                onClick: this.clickEvent
+            },
+            {
+                label: 'תפריט נוסף',
+                subMenu: true,
+                subMenuItems: [
+                    {
+                        label: 'שמור',
+                        onClick: this.clickEvent
+                    },
+                    {
+                        label: 'ערוך',
+                        onClick: this.clickEvent
+                    },
+                    {
+                        label: 'עוד תפריט נוסף',
+                        subMenu: true,
+                        subMenuItems: [
+                            {
+                                label: 'שמור',
+                                onClick: this.clickEvent
+                            },
+                            {
+                                label: 'ערוך',
+                                onClick: this.clickEvent
+                            }]
+                    }
+                ]
+            }
+        ];
+        this.options = {
+            rtl: true
+        };
     }
     AppComponent.prototype.clickEvent = function ($event) {
         console.log('clicked ', $event);
@@ -123,8 +165,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(405),
-            styles: [__webpack_require__(399)]
+            template: __webpack_require__(407),
+            styles: [__webpack_require__(400)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -134,14 +176,14 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 344:
+/***/ 345:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu___ = __webpack_require__(400);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu___ = __webpack_require__(401);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(344);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -179,7 +221,7 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -195,15 +237,15 @@ var environment = {
 
 /***/ }),
 
-/***/ 399:
+/***/ 400:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(151)();
+exports = module.exports = __webpack_require__(152)();
 // imports
 
 
 // module
-exports.push([module.i, ".box{\n   height: 180px;\n   width: 180px;\n   background-color: #e3e4c2;\n   line-height: 180px;\n   text-align: center;\n   box-shadow: 6px 6px 15px 2px rgba(0,0,0,.3);\n}\n", ""]);
+exports.push([module.i, ".box{\n   height: 180px;\n   width: 180px;\n   background-color: #e3e4c2;\n   line-height: 140px;\n   text-align: center;\n   box-shadow: 6px 6px 15px 2px rgba(0,0,0,.3);\n   display: inline-block;\n   margin: 20px;\n}\n\n.box.box-right{\n  float: right;\n  width: 240px;\n}\n", ""]);
 
 // exports
 
@@ -213,20 +255,20 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 405:
+/***/ 407:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxOne\">\n  <h2>{{title}}</h2>\n</div>\n<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxTwo\">\n  <h2>{{title}}</h2>\n</div>\n"
+module.exports = "<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxOne\">\n  <h2>{{title}}</h2>\n</div>\n<div class=\"box box-right\" [sh-context]=\"itemsRtl\" [sh-data-context]=\"dataCtxTwo\" [sh-options]=\"options\">\n  <h2>{{titleRtl}}</h2>\n</div>\n"
 
 /***/ }),
 
-/***/ 415:
+/***/ 417:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(245);
+module.exports = __webpack_require__(246);
 
 
 /***/ })
 
-},[415]);
+},[417]);
 //# sourceMappingURL=main.bundle.js.map
