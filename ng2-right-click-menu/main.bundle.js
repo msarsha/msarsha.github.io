@@ -1,6 +1,539 @@
-webpackJsonp([1,4],{
+webpackJsonp([1],{
 
-/***/ 170:
+/***/ "../../../../../../index.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_sh_context_menu_module__ = __webpack_require__("../../../../../../src/sh-context-menu.module.ts");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_sh_context_menu_module__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_sh_context_item__ = __webpack_require__("../../../../../../src/sh-context-item.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_sh_context_item___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__src_sh_context_item__);
+/* unused harmony reexport IShContextMenuItem */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_sh_context_options__ = __webpack_require__("../../../../../../src/sh-context-options.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_sh_context_options___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__src_sh_context_options__);
+/* unused harmony reexport IShContextOptions */
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/html.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HtmlDirective; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var HtmlDirective = (function () {
+    function HtmlDirective(elmRef) {
+        this.elmRef = elmRef;
+    }
+    HtmlDirective.prototype.ngAfterContentInit = function () {
+        this.elmRef.nativeElement.insertAdjacentHTML('afterbegin', this.content);
+    };
+    return HtmlDirective;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* Input */])('sh-html'),
+    __metadata("design:type", Object)
+], HtmlDirective.prototype, "content", void 0);
+HtmlDirective = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* Directive */])({
+        selector: '[sh-html]'
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */]) === "function" && _a || Object])
+], HtmlDirective);
+
+var _a;
+//# sourceMappingURL=html.directive.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-default-options.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextDefaultOptions; });
+var ShContextDefaultOptions = {
+    rtl: false,
+    theme: 'light'
+};
+//# sourceMappingURL=sh-context-default-options.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-item.ts":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=sh-context-item.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-menu.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sh_context_service__ = __webpack_require__("../../../../../../src/sh-context-service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextMenuComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ShContextMenuComponent = (function () {
+    function ShContextMenuComponent(ctxService) {
+        this.ctxService = ctxService;
+        this.onClose = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["e" /* EventEmitter */]();
+    }
+    ShContextMenuComponent.prototype.ngOnInit = function () {
+        this.options = this.ctxService.getOptions();
+    };
+    ShContextMenuComponent.prototype.ngAfterContentInit = function () {
+        if (this.options.rtl)
+            this.setRtlLocation();
+    };
+    ShContextMenuComponent.prototype.close = function () {
+        this.onClose.emit();
+    };
+    ShContextMenuComponent.prototype.onClick = function (item) {
+        if (this.isItemDisabled(item))
+            return;
+        if (item.onClick) {
+            item.onClick({
+                menuItem: item,
+                dataContext: this.dataContext
+            });
+            this.close();
+        }
+    };
+    ShContextMenuComponent.prototype.isItemDisabled = function (item) {
+        if (!item.disabled)
+            return false;
+        return item.disabled(this.dataContext);
+    };
+    ShContextMenuComponent.prototype.isItemVisible = function (item) {
+        if (!item.visible)
+            return true;
+        return item.visible(this.dataContext);
+    };
+    ShContextMenuComponent.prototype.setRtlLocation = function () {
+        var elmRect = this.childRef.nativeElement.getClientRects()[0];
+        this.position.left = this.position.left - elmRect.width;
+    };
+    return ShContextMenuComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])(),
+    __metadata("design:type", Object)
+], ShContextMenuComponent.prototype, "position", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])(),
+    __metadata("design:type", Array)
+], ShContextMenuComponent.prototype, "items", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])(),
+    __metadata("design:type", Object)
+], ShContextMenuComponent.prototype, "dataContext", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Output */])(),
+    __metadata("design:type", Object)
+], ShContextMenuComponent.prototype, "onClose", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["G" /* ViewChild */])('childRef'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* ElementRef */]) === "function" && _a || Object)
+], ShContextMenuComponent.prototype, "childRef", void 0);
+ShContextMenuComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Component */])({
+        selector: 'sh-context-menu',
+        template: "\n    <div #childRef class=\"sh-context--container\"\n      [class.dark]=\"options.theme == 'dark'\"\n      [style.left]=\"position.left + 'px'\"\n      [style.top]=\"position.top + 'px'\"\n      [style.direction]=\"(options.rtl ? 'rtl' : 'ltr' )\">\n      <ul>\n          <li *ngFor=\"let item of items\"\n            [ngClass]=\"{'sh-menu-item': !item.divider, 'sh-context-divider': item.divider, 'sh-menu-disabled': isItemDisabled(item), 'sh-menu-hidden': !isItemVisible(item)}\"\n            (click)=\"onClick(item)\">\n              <div *ngIf=\"!item.divider && !item.subMenu\" [sh-html]=\"item.label\">\n              </div> \n              <div *ngIf=\"item.subMenu\"\n                [sh-context-sub-menu]=\"item.subMenuItems\"\n                [sh-data-context]=\"dataContext\"\n                (closeSubMenu)=\"close()\"\n                [sh-html]=\"item.label\">\n               <div [ngClass]=\"{'right-arrow': !options.rtl, 'left-arrow': options.rtl}\"></div>\n              </div>\n          </li>\n      </ul>\n    </div>\n",
+        styles: ["\n  .sh-context--container{\n    font-family: sans-serif;\n    position: fixed;\n    background: #ececec;\n    min-width: 150px;\n    border: 1px solid rgba(0,0,0,0.2);\n    border-radius: 3px;\n    box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);\n    z-index: 100;\n    color: black;\n  }\n  .dark{\n      background:#383737 !important;\n      color:white !important;\n    }\n  .sh-context--container ul{\n    list-style: none;\n    padding: 5px 0;\n    margin: 0;\n  }\n\n  .sh-context--container ul li{\n      padding: 5px 10px 5px 15px;\n      transition: all 0.15s;\n  }\n\n  .sh-context--container ul li.sh-context-divider{\n      height: 1px;\n      margin: 1px 1px 8px 1px;\n      overflow: hidden;\n      border-bottom: 1px solid #d0d0d0;\n      line-height: 10px;\n    }\n\n  .sh-context--container ul li.sh-menu-item:hover{\n      cursor: pointer;\n      background: #4b8bec;\n      color: white;\n  }\n \n   .sh-context--container.dark ul li.sh-menu-item:hover{\n      cursor: pointer;\n      background: #4b8bec;\n      color: white;\n  }\n  .sh-context--container ul li.sh-menu-disabled{\n      color: #d0d0d0;\n   }\n\n   .sh-context--container ul li.sh-menu-item.sh-menu-hidden{\n      display: none;\n   }\n\n  .sh-context--container ul li.sh-menu-disabled:hover{\n      cursor: not-allowed;\n      color: #d0d0d0;\n      background: #ececec;\n  }\n\n  .right-arrow{\n    float: right;\n    margin-left: 10px;\n    margin-top: 3px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n    border-left: 8px solid black;\n  }\n\n  .left-arrow{\n    float: left;\n    margin-right: 10px;\n    margin-top: 3px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n    border-right: 8px solid black;\n  }\n"]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__sh_context_service__["b" /* ShContextService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__sh_context_service__["b" /* ShContextService */]) === "function" && _b || Object])
+], ShContextMenuComponent);
+
+var _a, _b;
+//# sourceMappingURL=sh-context-menu.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-menu.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sh_context_service__ = __webpack_require__("../../../../../../src/sh-context-service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sh_context_overlay_component__ = __webpack_require__("../../../../../../src/sh-context-overlay.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sh_context_menu_component__ = __webpack_require__("../../../../../../src/sh-context-menu.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sh_context_options__ = __webpack_require__("../../../../../../src/sh-context-options.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sh_context_options___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__sh_context_options__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextMenuDirective; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ShContextMenuDirective = (function () {
+    function ShContextMenuDirective(viewRef, resolver, ctxService) {
+        this.viewRef = viewRef;
+        this.resolver = resolver;
+        this.ctxService = ctxService;
+    }
+    ShContextMenuDirective.prototype.onClick = function (event) {
+        this.options = this.ctxService.setOptions(this.options);
+        this.closeMenu();
+        this.ctxComponent = this.createContextComponent();
+        this.overlayComponent = this.createOverlayComponent();
+        this.registerBindings();
+        this.registerEvents();
+        this.setLocation(event);
+        return false;
+    };
+    ShContextMenuDirective.prototype.registerEvents = function () {
+        var _this = this;
+        this.ctxComponent.instance.onClose.subscribe(function () {
+            _this.closeMenu();
+        });
+        this.overlayComponent.instance.onClick.subscribe(function () { _this.closeMenu(); });
+    };
+    ShContextMenuDirective.prototype.registerBindings = function () {
+        this.ctxComponent.instance.items = this.menuItems;
+        this.ctxComponent.instance.dataContext = this.dataContext;
+    };
+    ShContextMenuDirective.prototype.createContextComponent = function () {
+        var shContextMenuFactory = this.resolver.resolveComponentFactory(__WEBPACK_IMPORTED_MODULE_3__sh_context_menu_component__["a" /* ShContextMenuComponent */]);
+        var shContextComponentRef = this.viewRef.createComponent(shContextMenuFactory);
+        return shContextComponentRef;
+    };
+    ShContextMenuDirective.prototype.createOverlayComponent = function () {
+        var shContextOverlayFactory = this.resolver.resolveComponentFactory(__WEBPACK_IMPORTED_MODULE_2__sh_context_overlay_component__["a" /* ShContextOverlayComponent */]);
+        var shContextOverlayRef = this.viewRef.createComponent(shContextOverlayFactory);
+        return shContextOverlayRef;
+    };
+    ShContextMenuDirective.prototype.setLocation = function (event) {
+        var clientX = event.clientX, clientY = event.clientY;
+        var position = {
+            top: clientY,
+            left: clientX
+        };
+        this.ctxComponent.instance.position = position;
+    };
+    ShContextMenuDirective.prototype.closeMenu = function () {
+        this.viewRef.clear();
+    };
+    return ShContextMenuDirective;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])('sh-context'),
+    __metadata("design:type", Array)
+], ShContextMenuDirective.prototype, "menuItems", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])('sh-data-context'),
+    __metadata("design:type", Object)
+], ShContextMenuDirective.prototype, "dataContext", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* Input */])('sh-options'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__sh_context_options__["IShContextOptions"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__sh_context_options__["IShContextOptions"]) === "function" && _a || Object)
+], ShContextMenuDirective.prototype, "options", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* HostListener */])('contextmenu', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ShContextMenuDirective.prototype, "onClick", null);
+ShContextMenuDirective = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["k" /* Directive */])({
+        selector: '[sh-context]'
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* ViewContainerRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* ViewContainerRef */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_core__["r" /* ComponentFactoryResolver */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_core__["r" /* ComponentFactoryResolver */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__sh_context_service__["b" /* ShContextService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__sh_context_service__["b" /* ShContextService */]) === "function" && _d || Object])
+], ShContextMenuDirective);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=sh-context-menu.directive.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-menu.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__html_directive__ = __webpack_require__("../../../../../../src/html.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sh_context_overlay_component__ = __webpack_require__("../../../../../../src/sh-context-overlay.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sh_context_menu_directive__ = __webpack_require__("../../../../../../src/sh-context-menu.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sh_context_menu_component__ = __webpack_require__("../../../../../../src/sh-context-menu.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__sh_context_sub_menu_directive__ = __webpack_require__("../../../../../../src/sh-context-sub-menu.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sh_context_service__ = __webpack_require__("../../../../../../src/sh-context-service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextMenuModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+var ShContextMenuModule = (function () {
+    function ShContextMenuModule() {
+    }
+    return ShContextMenuModule;
+}());
+ShContextMenuModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_4__sh_context_menu_directive__["a" /* ShContextMenuDirective */],
+            __WEBPACK_IMPORTED_MODULE_5__sh_context_menu_component__["a" /* ShContextMenuComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__sh_context_sub_menu_directive__["a" /* ShContextSubMenuDirective */],
+            __WEBPACK_IMPORTED_MODULE_3__sh_context_overlay_component__["a" /* ShContextOverlayComponent */],
+            __WEBPACK_IMPORTED_MODULE_2__html_directive__["a" /* HtmlDirective */]
+        ],
+        exports: [__WEBPACK_IMPORTED_MODULE_4__sh_context_menu_directive__["a" /* ShContextMenuDirective */]],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
+            __WEBPACK_IMPORTED_MODULE_7__sh_context_service__["a" /* ShContextServiceModule */]
+        ],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_5__sh_context_menu_component__["a" /* ShContextMenuComponent */],
+            __WEBPACK_IMPORTED_MODULE_3__sh_context_overlay_component__["a" /* ShContextOverlayComponent */]
+        ]
+    })
+], ShContextMenuModule);
+
+//# sourceMappingURL=sh-context-menu.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-options.ts":
+/***/ (function(module, exports) {
+
+;
+//# sourceMappingURL=sh-context-options.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-overlay.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextOverlayComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ShContextOverlayComponent = (function () {
+    function ShContextOverlayComponent() {
+        this.onClick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* EventEmitter */]();
+    }
+    return ShContextOverlayComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Output */])(),
+    __metadata("design:type", Object)
+], ShContextOverlayComponent.prototype, "onClick", void 0);
+ShContextOverlayComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Component */])({
+        selector: 'sh-context-overlay',
+        template: "<div class=\"sh-context-overlay\" (mousedown)=\"onClick.emit()\"></div>",
+        styles: ["\n    .sh-context-overlay{\n      position: fixed;\n      top:0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 99;\n      background-color: transparent;\n   }\n  "]
+    })
+], ShContextOverlayComponent);
+
+//# sourceMappingURL=sh-context-overlay.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sh_context_default_options__ = __webpack_require__("../../../../../../src/sh-context-default-options.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ShContextService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextServiceModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var ShContextService = (function () {
+    function ShContextService() {
+    }
+    ShContextService.prototype.setOptions = function (opts) {
+        this.options = Object.assign({}, __WEBPACK_IMPORTED_MODULE_1__sh_context_default_options__["a" /* ShContextDefaultOptions */], opts);
+        return this.options;
+    };
+    ShContextService.prototype.getOptions = function () {
+        return this.options;
+    };
+    return ShContextService;
+}());
+ShContextService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])()
+], ShContextService);
+
+var ShContextServiceModule = (function () {
+    function ShContextServiceModule() {
+    }
+    return ShContextServiceModule;
+}());
+ShContextServiceModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */])({
+        providers: [ShContextService]
+    })
+], ShContextServiceModule);
+
+//# sourceMappingURL=sh-context-service.js.map
+
+/***/ }),
+
+/***/ "../../../../../../src/sh-context-sub-menu.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sh_context_menu_component__ = __webpack_require__("../../../../../../src/sh-context-menu.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sh_context_service__ = __webpack_require__("../../../../../../src/sh-context-service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextSubMenuDirective; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ShContextSubMenuDirective = (function () {
+    function ShContextSubMenuDirective(viewRef, elmRef, resolver, ctxService) {
+        this.viewRef = viewRef;
+        this.elmRef = elmRef;
+        this.resolver = resolver;
+        this.ctxService = ctxService;
+        this.closeSubMenu = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* EventEmitter */]();
+    }
+    ShContextSubMenuDirective.prototype.ngOnInit = function () {
+        this.options = this.ctxService.getOptions();
+    };
+    ShContextSubMenuDirective.prototype.onMouseOver = function (event) {
+        this.closeCurrent();
+        this.ctxComponent = this.createContextComponent();
+        this.registerBindings();
+        this.registerEvents();
+        this.setLocation();
+        return false;
+    };
+    ShContextSubMenuDirective.prototype.registerEvents = function () {
+        var _this = this;
+        this.ctxComponent.instance.onClose.subscribe(function () {
+            _this.closeSubMenu.emit();
+        });
+    };
+    ShContextSubMenuDirective.prototype.registerBindings = function () {
+        this.ctxComponent.instance.items = this.menuItems;
+        this.ctxComponent.instance.dataContext = this.dataContext;
+    };
+    ShContextSubMenuDirective.prototype.createContextComponent = function () {
+        var shContextMenuFactory = this.resolver.resolveComponentFactory(__WEBPACK_IMPORTED_MODULE_1__sh_context_menu_component__["a" /* ShContextMenuComponent */]);
+        var shContextComponentRef = this.viewRef.createComponent(shContextMenuFactory);
+        return shContextComponentRef;
+    };
+    ShContextSubMenuDirective.prototype.setLocation = function () {
+        var _a = this.elmRef.nativeElement.getClientRects()[0], top = _a.top, left = _a.left, width = _a.width;
+        var position = {
+            top: top,
+            left: this.options.rtl ? left : left + width
+        };
+        this.ctxComponent.instance.position = position;
+    };
+    ShContextSubMenuDirective.prototype.closeMenu = function () {
+        this.closeSubMenu.emit();
+    };
+    ShContextSubMenuDirective.prototype.closeCurrent = function () {
+        this.viewRef.clear();
+    };
+    return ShContextSubMenuDirective;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* Input */])('sh-context-sub-menu'),
+    __metadata("design:type", Array)
+], ShContextSubMenuDirective.prototype, "menuItems", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* Input */])('sh-data-context'),
+    __metadata("design:type", Object)
+], ShContextSubMenuDirective.prototype, "dataContext", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Output */])(),
+    __metadata("design:type", Object)
+], ShContextSubMenuDirective.prototype, "closeSubMenu", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* HostListener */])('mouseover', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ShContextSubMenuDirective.prototype, "onMouseOver", null);
+ShContextSubMenuDirective = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* Directive */])({
+        selector: '[sh-context-sub-menu]'
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* ViewContainerRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* ViewContainerRef */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* ElementRef */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* ComponentFactoryResolver */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* ComponentFactoryResolver */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__sh_context_service__["b" /* ShContextService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__sh_context_service__["b" /* ShContextService */]) === "function" && _d || Object])
+], ShContextSubMenuDirective);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=sh-context-sub-menu.directive.js.map
+
+/***/ }),
+
+/***/ "../../../../../src async recursive":
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -9,1695 +542,51 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 170;
-
-
-/***/ }),
-
-/***/ 171:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(241);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gendir_app_app_module_ngfactory__ = __webpack_require__(230);
-
-
-
-
-if (__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].production) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* enableProdMode */])();
-}
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["a" /* platformBrowser */])().bootstrapModuleFactory(__WEBPACK_IMPORTED_MODULE_3__gendir_app_app_module_ngfactory__["a" /* AppModuleNgFactory */]);
-//# sourceMappingURL=main.js.map
+webpackEmptyContext.id = "../../../../../src async recursive";
 
 /***/ }),
 
-/***/ 228:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "../../../../../src/app/app.component.css":
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return styles; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-var styles = ['.box{\n   height: 180px;\n   width: 180px;\n   background-color: #e3e4c2;\n   line-height: 140px;\n   text-align: center;\n   box-shadow: 6px 6px 15px 2px rgba(0,0,0,.3);\n   display: inline-block;\n   margin: 20px;\n}\n\n.box.box-right{\n  float: right;\n  width: 240px;\n}\n\ni.menu-icon{\n  margin-right: 3px;\n  display: inline-block;\n  color: green;\n}\n'];
-//# sourceMappingURL=app.component.css.ngstyle.js.map
-
-/***/ }),
-
-/***/ 229:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_app_component__ = __webpack_require__(239);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component_css_ngstyle__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_core_src_linker_view_container__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__gendir_node_modules_ng2_right_click_menu_src_sh_context_menu_directive_ngfactory__ = __webpack_require__(236);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_component_factory_resolver__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_sh_context_service__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_right_click_menu_src_sh_context_menu_directive__ = __webpack_require__(114);
-/* unused harmony export Wrapper_AppComponent */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponentNgFactory; });
-/* unused harmony export View_AppComponent0 */
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
 
 
+// module
+exports.push([module.i, ".box{\r\n   height: 180px;\r\n   width: 180px;\r\n   background-color: #e3e4c2;\r\n   line-height: 140px;\r\n   text-align: center;\r\n   box-shadow: 6px 6px 15px 2px rgba(0,0,0,.3);\r\n   display: inline-block;\r\n   margin: 20px;\r\n}\r\n\r\n.box.box-right{\r\n  float: right;\r\n  width: 240px;\r\n}\r\n\r\ni.menu-icon{\r\n  margin-right: 3px;\r\n  display: inline-block;\r\n  color: green;\r\n}\r\n", ""]);
+
+// exports
 
 
-
-
-
-
-
-
-
-
-
-
-var Wrapper_AppComponent = (function () {
-    function Wrapper_AppComponent() {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0__app_app_component__["a" /* AppComponent */]();
-    }
-    Wrapper_AppComponent.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_AppComponent.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_AppComponent.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        return changed;
-    };
-    Wrapper_AppComponent.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_AppComponent.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_AppComponent.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_AppComponent;
-}());
-var renderType_AppComponent_Host = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].None, [], {});
-var View_AppComponent_Host0 = (function (_super) {
-    __extends(View_AppComponent_Host0, _super);
-    function View_AppComponent_Host0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_AppComponent_Host0, renderType_AppComponent_Host, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].HOST, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-    }
-    View_AppComponent_Host0.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["selectOrCreateRenderHostElement"](this.renderer, 'app-root', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], rootSelector, null);
-        this.compView_0 = new View_AppComponent0(this.viewUtils, this, 0, this._el_0);
-        this._AppComponent_0_3 = new Wrapper_AppComponent();
-        this.compView_0.create(this._AppComponent_0_3.context);
-        this.init(this._el_0, (this.renderer.directRenderer ? null : [this._el_0]), null);
-        return new __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__["a" /* ComponentRef_ */](0, this, this._el_0, this._AppComponent_0_3.context);
-    };
-    View_AppComponent_Host0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_0__app_app_component__["a" /* AppComponent */]) && (0 === requestNodeIndex))) {
-            return this._AppComponent_0_3.context;
-        }
-        return notFoundResult;
-    };
-    View_AppComponent_Host0.prototype.detectChangesInternal = function (throwOnChange) {
-        this._AppComponent_0_3.ngDoCheck(this, this._el_0, throwOnChange);
-        this.compView_0.internalDetectChanges(throwOnChange);
-    };
-    View_AppComponent_Host0.prototype.destroyInternal = function () {
-        this.compView_0.destroy();
-    };
-    View_AppComponent_Host0.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._el_0, ctx);
-    };
-    return View_AppComponent_Host0;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-var AppComponentNgFactory = new __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__["b" /* ComponentFactory */]('app-root', View_AppComponent_Host0, __WEBPACK_IMPORTED_MODULE_0__app_app_component__["a" /* AppComponent */]);
-var styles_AppComponent = [__WEBPACK_IMPORTED_MODULE_7__app_component_css_ngstyle__["a" /* styles */]];
-var renderType_AppComponent = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].None, styles_AppComponent, {});
-var View_AppComponent0 = (function (_super) {
-    __extends(View_AppComponent0, _super);
-    function View_AppComponent0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_AppComponent0, renderType_AppComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].COMPONENT, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-        this._expr_16 = __WEBPACK_IMPORTED_MODULE_10__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_17 = __WEBPACK_IMPORTED_MODULE_10__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    View_AppComponent0.prototype.createInternal = function (rootSelector) {
-        var parentRenderNode = this.renderer.createViewRoot(this.parentElement);
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'box'), null);
-        this._vc_0 = new __WEBPACK_IMPORTED_MODULE_8__angular_core_src_linker_view_container__["a" /* ViewContainer */](0, null, this, this._el_0);
-        this._ShContextMenuDirective_0_5 = new __WEBPACK_IMPORTED_MODULE_9__gendir_node_modules_ng2_right_click_menu_src_sh_context_menu_directive_ngfactory__["a" /* Wrapper_ShContextMenuDirective */](this._vc_0.vcRef, this.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_component_factory_resolver__["a" /* ComponentFactoryResolver */], this.parentIndex), this.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */], this.parentIndex));
-        this._text_1 = this.renderer.createText(this._el_0, '\n  ', null);
-        this._el_2 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'h2', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_3 = this.renderer.createText(this._el_2, '', null);
-        this._text_4 = this.renderer.createText(this._el_0, '\n', null);
-        this._text_5 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._el_6 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'box box-right'), null);
-        this._vc_6 = new __WEBPACK_IMPORTED_MODULE_8__angular_core_src_linker_view_container__["a" /* ViewContainer */](6, null, this, this._el_6);
-        this._ShContextMenuDirective_6_5 = new __WEBPACK_IMPORTED_MODULE_9__gendir_node_modules_ng2_right_click_menu_src_sh_context_menu_directive_ngfactory__["a" /* Wrapper_ShContextMenuDirective */](this._vc_6.vcRef, this.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_component_factory_resolver__["a" /* ComponentFactoryResolver */], this.parentIndex), this.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */], this.parentIndex));
-        this._text_7 = this.renderer.createText(this._el_6, '\n  ', null);
-        this._el_8 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_6, 'h2', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_9 = this.renderer.createText(this._el_8, '', null);
-        this._text_10 = this.renderer.createText(this._el_6, '\n', null);
-        this._text_11 = this.renderer.createText(parentRenderNode, '\n', null);
-        var disposable_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_0, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'contextmenu', null), this.eventHandler(this.handleEvent_0));
-        var disposable_1 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_6, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'contextmenu', null), this.eventHandler(this.handleEvent_6));
-        this.init(null, (this.renderer.directRenderer ? null : [
-            this._el_0,
-            this._text_1,
-            this._el_2,
-            this._text_3,
-            this._text_4,
-            this._text_5,
-            this._el_6,
-            this._text_7,
-            this._el_8,
-            this._text_9,
-            this._text_10,
-            this._text_11
-        ]), [
-            disposable_0,
-            disposable_1
-        ]);
-        return null;
-    };
-    View_AppComponent0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_13_ng2_right_click_menu_src_sh_context_menu_directive__["a" /* ShContextMenuDirective */]) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 4)))) {
-            return this._ShContextMenuDirective_0_5.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_13_ng2_right_click_menu_src_sh_context_menu_directive__["a" /* ShContextMenuDirective */]) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 10)))) {
-            return this._ShContextMenuDirective_6_5.context;
-        }
-        return notFoundResult;
-    };
-    View_AppComponent0.prototype.detectChangesInternal = function (throwOnChange) {
-        var currVal_0_0_0 = this.context.items;
-        this._ShContextMenuDirective_0_5.check_menuItems(currVal_0_0_0, throwOnChange, false);
-        var currVal_0_0_1 = this.context.dataCtxOne;
-        this._ShContextMenuDirective_0_5.check_dataContext(currVal_0_0_1, throwOnChange, false);
-        this._ShContextMenuDirective_0_5.ngDoCheck(this, this._el_0, throwOnChange);
-        var currVal_6_0_0 = this.context.itemsRtl;
-        this._ShContextMenuDirective_6_5.check_menuItems(currVal_6_0_0, throwOnChange, false);
-        var currVal_6_0_1 = this.context.dataCtxTwo;
-        this._ShContextMenuDirective_6_5.check_dataContext(currVal_6_0_1, throwOnChange, false);
-        var currVal_6_0_2 = this.context.options;
-        this._ShContextMenuDirective_6_5.check_options(currVal_6_0_2, throwOnChange, false);
-        this._ShContextMenuDirective_6_5.ngDoCheck(this, this._el_6, throwOnChange);
-        this._vc_0.detectChangesInNestedViews(throwOnChange);
-        this._vc_6.detectChangesInNestedViews(throwOnChange);
-        var currVal_16 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["inlineInterpolate"](1, '', this.context.title, '');
-        if (__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_16, currVal_16)) {
-            this.renderer.setText(this._text_3, currVal_16);
-            this._expr_16 = currVal_16;
-        }
-        var currVal_17 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["inlineInterpolate"](1, '', this.context.titleRtl, '');
-        if (__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_17, currVal_17)) {
-            this.renderer.setText(this._text_9, currVal_17);
-            this._expr_17 = currVal_17;
-        }
-    };
-    View_AppComponent0.prototype.destroyInternal = function () {
-        this._vc_0.destroyNestedViews();
-        this._vc_6.destroyNestedViews();
-    };
-    View_AppComponent0.prototype.handleEvent_0 = function (eventName, $event) {
-        this.markPathToRootAsCheckOnce();
-        var result = true;
-        result = (this._ShContextMenuDirective_0_5.handleEvent(eventName, $event) && result);
-        return result;
-    };
-    View_AppComponent0.prototype.handleEvent_6 = function (eventName, $event) {
-        this.markPathToRootAsCheckOnce();
-        var result = true;
-        result = (this._ShContextMenuDirective_6_5.handleEvent(eventName, $event) && result);
-        return result;
-    };
-    return View_AppComponent0;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-//# sourceMappingURL=app.component.ngfactory.js.map
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 230:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "../../../../../src/app/app.component.html":
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core_src_linker_ng_module_factory__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_app_module__ = __webpack_require__(240);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_src_common_module__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_right_click_menu_src_sh_context_service__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_right_click_menu_src_sh_context_menu_module__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common_src_localization__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_core_src_application_init__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_core_src_testability_testability__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core_src_application_ref__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_compiler__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_src_dom_events_hammer_gestures__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_src_dom_events_event_manager__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_platform_browser_src_dom_shared_styles_host__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_platform_browser_src_dom_dom_renderer__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_platform_browser_src_security_dom_sanitization_service__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_core_src_animation_animation_queue__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_platform_browser_src_browser_title__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__gendir_node_modules_ng2_right_click_menu_src_sh_context_menu_component_ngfactory__ = __webpack_require__(235);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__gendir_node_modules_ng2_right_click_menu_src_sh_context_overlay_component_ngfactory__ = __webpack_require__(237);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__app_component_ngfactory__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_core_src_i18n_tokens__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__angular_core_src_application_tokens__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_platform_browser_src_dom_events_dom_events__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__angular_platform_browser_src_dom_events_key_events__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__angular_core_src_zone_ng_zone__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__angular_platform_browser_src_dom_debug_ng_probe__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_core_src_console__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_core_src_error_handler__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__angular_platform_browser_src_dom_dom_tokens__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__angular_platform_browser_src_dom_animation_driver__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_core_src_render_api__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_core_src_security__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_core_src_change_detection_differs_iterable_differs__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__angular_core_src_change_detection_differs_keyvalue_differs__ = __webpack_require__(48);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModuleNgFactory; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var AppModuleInjector = (function (_super) {
-    __extends(AppModuleInjector, _super);
-    function AppModuleInjector(parent) {
-        _super.call(this, parent, [
-            __WEBPACK_IMPORTED_MODULE_20__gendir_node_modules_ng2_right_click_menu_src_sh_context_menu_component_ngfactory__["a" /* ShContextMenuComponentNgFactory */],
-            __WEBPACK_IMPORTED_MODULE_21__gendir_node_modules_ng2_right_click_menu_src_sh_context_overlay_component_ngfactory__["a" /* ShContextOverlayComponentNgFactory */],
-            __WEBPACK_IMPORTED_MODULE_22__app_component_ngfactory__["a" /* AppComponentNgFactory */]
-        ], [__WEBPACK_IMPORTED_MODULE_22__app_component_ngfactory__["a" /* AppComponentNgFactory */]]);
-    }
-    Object.defineProperty(AppModuleInjector.prototype, "_LOCALE_ID_6", {
-        get: function () {
-            if ((this.__LOCALE_ID_6 == null)) {
-                (this.__LOCALE_ID_6 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__["a" /* _localeFactory */](this.parent.get(__WEBPACK_IMPORTED_MODULE_23__angular_core_src_i18n_tokens__["a" /* LOCALE_ID */], null)));
-            }
-            return this.__LOCALE_ID_6;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_NgLocalization_7", {
-        get: function () {
-            if ((this.__NgLocalization_7 == null)) {
-                (this.__NgLocalization_7 = new __WEBPACK_IMPORTED_MODULE_7__angular_common_src_localization__["a" /* NgLocaleLocalization */](this._LOCALE_ID_6));
-            }
-            return this.__NgLocalization_7;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_ApplicationRef_12", {
-        get: function () {
-            if ((this.__ApplicationRef_12 == null)) {
-                (this.__ApplicationRef_12 = this._ApplicationRef__11);
-            }
-            return this.__ApplicationRef_12;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_Compiler_13", {
-        get: function () {
-            if ((this.__Compiler_13 == null)) {
-                (this.__Compiler_13 = new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_compiler__["a" /* Compiler */]());
-            }
-            return this.__Compiler_13;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_APP_ID_14", {
-        get: function () {
-            if ((this.__APP_ID_14 == null)) {
-                (this.__APP_ID_14 = __WEBPACK_IMPORTED_MODULE_24__angular_core_src_application_tokens__["a" /* _appIdRandomProviderFactory */]());
-            }
-            return this.__APP_ID_14;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_DOCUMENT_15", {
-        get: function () {
-            if ((this.__DOCUMENT_15 == null)) {
-                (this.__DOCUMENT_15 = __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["a" /* _document */]());
-            }
-            return this.__DOCUMENT_15;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_HAMMER_GESTURE_CONFIG_16", {
-        get: function () {
-            if ((this.__HAMMER_GESTURE_CONFIG_16 == null)) {
-                (this.__HAMMER_GESTURE_CONFIG_16 = new __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_src_dom_events_hammer_gestures__["a" /* HammerGestureConfig */]());
-            }
-            return this.__HAMMER_GESTURE_CONFIG_16;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_EVENT_MANAGER_PLUGINS_17", {
-        get: function () {
-            if ((this.__EVENT_MANAGER_PLUGINS_17 == null)) {
-                (this.__EVENT_MANAGER_PLUGINS_17 = [
-                    new __WEBPACK_IMPORTED_MODULE_25__angular_platform_browser_src_dom_events_dom_events__["a" /* DomEventsPlugin */](),
-                    new __WEBPACK_IMPORTED_MODULE_26__angular_platform_browser_src_dom_events_key_events__["a" /* KeyEventsPlugin */](),
-                    new __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_src_dom_events_hammer_gestures__["b" /* HammerGesturesPlugin */](this._HAMMER_GESTURE_CONFIG_16)
-                ]);
-            }
-            return this.__EVENT_MANAGER_PLUGINS_17;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_EventManager_18", {
-        get: function () {
-            if ((this.__EventManager_18 == null)) {
-                (this.__EventManager_18 = new __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_src_dom_events_event_manager__["a" /* EventManager */](this._EVENT_MANAGER_PLUGINS_17, this.parent.get(__WEBPACK_IMPORTED_MODULE_27__angular_core_src_zone_ng_zone__["a" /* NgZone */])));
-            }
-            return this.__EventManager_18;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_AnimationDriver_20", {
-        get: function () {
-            if ((this.__AnimationDriver_20 == null)) {
-                (this.__AnimationDriver_20 = __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["b" /* _resolveDefaultAnimationDriver */]());
-            }
-            return this.__AnimationDriver_20;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_DomRootRenderer_21", {
-        get: function () {
-            if ((this.__DomRootRenderer_21 == null)) {
-                (this.__DomRootRenderer_21 = new __WEBPACK_IMPORTED_MODULE_15__angular_platform_browser_src_dom_dom_renderer__["a" /* DomRootRenderer_ */](this._DOCUMENT_15, this._EventManager_18, this._DomSharedStylesHost_19, this._AnimationDriver_20, this._APP_ID_14));
-            }
-            return this.__DomRootRenderer_21;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_RootRenderer_22", {
-        get: function () {
-            if ((this.__RootRenderer_22 == null)) {
-                (this.__RootRenderer_22 = __WEBPACK_IMPORTED_MODULE_28__angular_platform_browser_src_dom_debug_ng_probe__["a" /* _createConditionalRootRenderer */](this._DomRootRenderer_21, this.parent.get(__WEBPACK_IMPORTED_MODULE_28__angular_platform_browser_src_dom_debug_ng_probe__["b" /* NgProbeToken */], null), this.parent.get(__WEBPACK_IMPORTED_MODULE_10__angular_core_src_application_ref__["a" /* NgProbeToken */], null)));
-            }
-            return this.__RootRenderer_22;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_DomSanitizer_23", {
-        get: function () {
-            if ((this.__DomSanitizer_23 == null)) {
-                (this.__DomSanitizer_23 = new __WEBPACK_IMPORTED_MODULE_16__angular_platform_browser_src_security_dom_sanitization_service__["a" /* DomSanitizerImpl */]());
-            }
-            return this.__DomSanitizer_23;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_Sanitizer_24", {
-        get: function () {
-            if ((this.__Sanitizer_24 == null)) {
-                (this.__Sanitizer_24 = this._DomSanitizer_23);
-            }
-            return this.__Sanitizer_24;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_AnimationQueue_25", {
-        get: function () {
-            if ((this.__AnimationQueue_25 == null)) {
-                (this.__AnimationQueue_25 = new __WEBPACK_IMPORTED_MODULE_17__angular_core_src_animation_animation_queue__["a" /* AnimationQueue */](this.parent.get(__WEBPACK_IMPORTED_MODULE_27__angular_core_src_zone_ng_zone__["a" /* NgZone */])));
-            }
-            return this.__AnimationQueue_25;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_ViewUtils_26", {
-        get: function () {
-            if ((this.__ViewUtils_26 == null)) {
-                (this.__ViewUtils_26 = new __WEBPACK_IMPORTED_MODULE_18__angular_core_src_linker_view_utils__["ViewUtils"](this._RootRenderer_22, this._Sanitizer_24, this._AnimationQueue_25));
-            }
-            return this.__ViewUtils_26;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_IterableDiffers_27", {
-        get: function () {
-            if ((this.__IterableDiffers_27 == null)) {
-                (this.__IterableDiffers_27 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__["b" /* _iterableDiffersFactory */]());
-            }
-            return this.__IterableDiffers_27;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_KeyValueDiffers_28", {
-        get: function () {
-            if ((this.__KeyValueDiffers_28 == null)) {
-                (this.__KeyValueDiffers_28 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__["c" /* _keyValueDiffersFactory */]());
-            }
-            return this.__KeyValueDiffers_28;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_SharedStylesHost_29", {
-        get: function () {
-            if ((this.__SharedStylesHost_29 == null)) {
-                (this.__SharedStylesHost_29 = this._DomSharedStylesHost_19);
-            }
-            return this.__SharedStylesHost_29;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_Title_30", {
-        get: function () {
-            if ((this.__Title_30 == null)) {
-                (this.__Title_30 = new __WEBPACK_IMPORTED_MODULE_19__angular_platform_browser_src_browser_title__["a" /* Title */]());
-            }
-            return this.__Title_30;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppModuleInjector.prototype, "_ShContextService_31", {
-        get: function () {
-            if ((this.__ShContextService_31 == null)) {
-                (this.__ShContextService_31 = new __WEBPACK_IMPORTED_MODULE_5_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */]());
-            }
-            return this.__ShContextService_31;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AppModuleInjector.prototype.createInternal = function () {
-        this._CommonModule_0 = new __WEBPACK_IMPORTED_MODULE_2__angular_common_src_common_module__["a" /* CommonModule */]();
-        this._ApplicationModule_1 = new __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__["d" /* ApplicationModule */]();
-        this._BrowserModule_2 = new __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["c" /* BrowserModule */](this.parent.get(__WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["c" /* BrowserModule */], null));
-        this._ShContextServiceModule_3 = new __WEBPACK_IMPORTED_MODULE_5_ng2_right_click_menu_src_sh_context_service__["b" /* ShContextServiceModule */]();
-        this._ShContextMenuModule_4 = new __WEBPACK_IMPORTED_MODULE_6_ng2_right_click_menu_src_sh_context_menu_module__["a" /* ShContextMenuModule */]();
-        this._AppModule_5 = new __WEBPACK_IMPORTED_MODULE_1__app_app_module__["a" /* AppModule */]();
-        this._ErrorHandler_8 = __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["d" /* errorHandler */]();
-        this._ApplicationInitStatus_9 = new __WEBPACK_IMPORTED_MODULE_8__angular_core_src_application_init__["a" /* ApplicationInitStatus */](this.parent.get(__WEBPACK_IMPORTED_MODULE_8__angular_core_src_application_init__["b" /* APP_INITIALIZER */], null));
-        this._Testability_10 = new __WEBPACK_IMPORTED_MODULE_9__angular_core_src_testability_testability__["a" /* Testability */](this.parent.get(__WEBPACK_IMPORTED_MODULE_27__angular_core_src_zone_ng_zone__["a" /* NgZone */]));
-        this._ApplicationRef__11 = new __WEBPACK_IMPORTED_MODULE_10__angular_core_src_application_ref__["b" /* ApplicationRef_ */](this.parent.get(__WEBPACK_IMPORTED_MODULE_27__angular_core_src_zone_ng_zone__["a" /* NgZone */]), this.parent.get(__WEBPACK_IMPORTED_MODULE_29__angular_core_src_console__["a" /* Console */]), this, this._ErrorHandler_8, this, this._ApplicationInitStatus_9, this.parent.get(__WEBPACK_IMPORTED_MODULE_9__angular_core_src_testability_testability__["b" /* TestabilityRegistry */], null), this._Testability_10);
-        this._DomSharedStylesHost_19 = new __WEBPACK_IMPORTED_MODULE_14__angular_platform_browser_src_dom_shared_styles_host__["a" /* DomSharedStylesHost */](this._DOCUMENT_15);
-        return this._AppModule_5;
-    };
-    AppModuleInjector.prototype.getInternal = function (token, notFoundResult) {
-        if ((token === __WEBPACK_IMPORTED_MODULE_2__angular_common_src_common_module__["a" /* CommonModule */])) {
-            return this._CommonModule_0;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_3__angular_core_src_application_module__["d" /* ApplicationModule */])) {
-            return this._ApplicationModule_1;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_src_browser__["c" /* BrowserModule */])) {
-            return this._BrowserModule_2;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_5_ng2_right_click_menu_src_sh_context_service__["b" /* ShContextServiceModule */])) {
-            return this._ShContextServiceModule_3;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_6_ng2_right_click_menu_src_sh_context_menu_module__["a" /* ShContextMenuModule */])) {
-            return this._ShContextMenuModule_4;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_1__app_app_module__["a" /* AppModule */])) {
-            return this._AppModule_5;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_23__angular_core_src_i18n_tokens__["a" /* LOCALE_ID */])) {
-            return this._LOCALE_ID_6;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_7__angular_common_src_localization__["b" /* NgLocalization */])) {
-            return this._NgLocalization_7;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_30__angular_core_src_error_handler__["a" /* ErrorHandler */])) {
-            return this._ErrorHandler_8;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_8__angular_core_src_application_init__["a" /* ApplicationInitStatus */])) {
-            return this._ApplicationInitStatus_9;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_9__angular_core_src_testability_testability__["a" /* Testability */])) {
-            return this._Testability_10;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_10__angular_core_src_application_ref__["b" /* ApplicationRef_ */])) {
-            return this._ApplicationRef__11;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_10__angular_core_src_application_ref__["c" /* ApplicationRef */])) {
-            return this._ApplicationRef_12;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_compiler__["a" /* Compiler */])) {
-            return this._Compiler_13;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_24__angular_core_src_application_tokens__["b" /* APP_ID */])) {
-            return this._APP_ID_14;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_31__angular_platform_browser_src_dom_dom_tokens__["a" /* DOCUMENT */])) {
-            return this._DOCUMENT_15;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_src_dom_events_hammer_gestures__["c" /* HAMMER_GESTURE_CONFIG */])) {
-            return this._HAMMER_GESTURE_CONFIG_16;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_src_dom_events_event_manager__["b" /* EVENT_MANAGER_PLUGINS */])) {
-            return this._EVENT_MANAGER_PLUGINS_17;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_src_dom_events_event_manager__["a" /* EventManager */])) {
-            return this._EventManager_18;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_14__angular_platform_browser_src_dom_shared_styles_host__["a" /* DomSharedStylesHost */])) {
-            return this._DomSharedStylesHost_19;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_32__angular_platform_browser_src_dom_animation_driver__["a" /* AnimationDriver */])) {
-            return this._AnimationDriver_20;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_15__angular_platform_browser_src_dom_dom_renderer__["b" /* DomRootRenderer */])) {
-            return this._DomRootRenderer_21;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_33__angular_core_src_render_api__["a" /* RootRenderer */])) {
-            return this._RootRenderer_22;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_16__angular_platform_browser_src_security_dom_sanitization_service__["b" /* DomSanitizer */])) {
-            return this._DomSanitizer_23;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_34__angular_core_src_security__["a" /* Sanitizer */])) {
-            return this._Sanitizer_24;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_17__angular_core_src_animation_animation_queue__["a" /* AnimationQueue */])) {
-            return this._AnimationQueue_25;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_18__angular_core_src_linker_view_utils__["ViewUtils"])) {
-            return this._ViewUtils_26;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_35__angular_core_src_change_detection_differs_iterable_differs__["a" /* IterableDiffers */])) {
-            return this._IterableDiffers_27;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_36__angular_core_src_change_detection_differs_keyvalue_differs__["a" /* KeyValueDiffers */])) {
-            return this._KeyValueDiffers_28;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_14__angular_platform_browser_src_dom_shared_styles_host__["b" /* SharedStylesHost */])) {
-            return this._SharedStylesHost_29;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_19__angular_platform_browser_src_browser_title__["a" /* Title */])) {
-            return this._Title_30;
-        }
-        if ((token === __WEBPACK_IMPORTED_MODULE_5_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */])) {
-            return this._ShContextService_31;
-        }
-        return notFoundResult;
-    };
-    AppModuleInjector.prototype.destroyInternal = function () {
-        this._ApplicationRef__11.ngOnDestroy();
-        this._DomSharedStylesHost_19.ngOnDestroy();
-    };
-    return AppModuleInjector;
-}(__WEBPACK_IMPORTED_MODULE_0__angular_core_src_linker_ng_module_factory__["a" /* NgModuleInjector */]));
-var AppModuleNgFactory = new __WEBPACK_IMPORTED_MODULE_0__angular_core_src_linker_ng_module_factory__["b" /* NgModuleFactory */](AppModuleInjector, __WEBPACK_IMPORTED_MODULE_1__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=app.module.ngfactory.js.map
+module.exports = "<div class=\"box\" [sh-context]=\"items\" [sh-data-context]=\"dataCtxOne\">\r\n  <h2>{{title}}</h2>\r\n</div>\r\n<div class=\"box box-right\" [sh-context]=\"itemsRtl\" [sh-data-context]=\"dataCtxTwo\" [sh-options]=\"options\">\r\n  <h2>{{titleRtl}}</h2>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ 231:
+/***/ "../../../../../src/app/app.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_class__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_NgClass; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_NgClass = (function () {
-    function Wrapper_NgClass(p0, p1, p2, p3) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_class__["a" /* NgClass */](p0, p1, p2, p3);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_1 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_NgClass.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_NgClass.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_NgClass.prototype.check_klass = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.klass = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_NgClass.prototype.check_ngClass = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_1, currValue))) {
-            this._changed = true;
-            this.context.ngClass = currValue;
-            this._expr_1 = currValue;
-        }
-    };
-    Wrapper_NgClass.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        if (!throwOnChange) {
-            this.context.ngDoCheck();
-        }
-        return changed;
-    };
-    Wrapper_NgClass.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_NgClass.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_NgClass.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_NgClass;
-}());
-//# sourceMappingURL=ng_class.ngfactory.js.map
-
-/***/ }),
-
-/***/ 232:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_for__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_NgFor; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_NgFor = (function () {
-    function Wrapper_NgFor(p0, p1, p2, p3) {
-        this._changed = false;
-        this._changes = {};
-        this.context = new __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_for__["a" /* NgFor */](p0, p1, p2, p3);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_1 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_2 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_NgFor.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_NgFor.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_NgFor.prototype.check_ngForOf = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.ngForOf = currValue;
-            this._changes['ngForOf'] = new __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["e" /* SimpleChange */](this._expr_0, currValue);
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_NgFor.prototype.check_ngForTrackBy = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_1, currValue))) {
-            this._changed = true;
-            this.context.ngForTrackBy = currValue;
-            this._changes['ngForTrackBy'] = new __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["e" /* SimpleChange */](this._expr_1, currValue);
-            this._expr_1 = currValue;
-        }
-    };
-    Wrapper_NgFor.prototype.check_ngForTemplate = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_2, currValue))) {
-            this._changed = true;
-            this.context.ngForTemplate = currValue;
-            this._changes['ngForTemplate'] = new __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["e" /* SimpleChange */](this._expr_2, currValue);
-            this._expr_2 = currValue;
-        }
-    };
-    Wrapper_NgFor.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        if (!throwOnChange) {
-            if (changed) {
-                this.context.ngOnChanges(this._changes);
-                this._changes = {};
-            }
-            this.context.ngDoCheck();
-        }
-        return changed;
-    };
-    Wrapper_NgFor.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_NgFor.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_NgFor.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_NgFor;
-}());
-//# sourceMappingURL=ng_for.ngfactory.js.map
-
-/***/ }),
-
-/***/ 233:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_if__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_NgIf; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_NgIf = (function () {
-    function Wrapper_NgIf(p0, p1) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0__angular_common_src_directives_ng_if__["a" /* NgIf */](p0, p1);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_NgIf.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_NgIf.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_NgIf.prototype.check_ngIf = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.ngIf = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_NgIf.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        return changed;
-    };
-    Wrapper_NgIf.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_NgIf.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_NgIf.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_NgIf;
-}());
-//# sourceMappingURL=ng_if.ngfactory.js.map
-
-/***/ }),
-
-/***/ 234:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_html_directive__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_HtmlDirective; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_HtmlDirective = (function () {
-    function Wrapper_HtmlDirective(p0) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_html_directive__["a" /* HtmlDirective */](p0);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_HtmlDirective.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_HtmlDirective.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_HtmlDirective.prototype.check_content = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.content = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_HtmlDirective.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        return changed;
-    };
-    Wrapper_HtmlDirective.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_HtmlDirective.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_HtmlDirective.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_HtmlDirective;
-}());
-//# sourceMappingURL=html.directive.ngfactory.js.map
-
-/***/ }),
-
-/***/ 235:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_component__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core_src_metadata_view__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_core_src_linker_component_factory__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_right_click_menu_src_sh_context_service__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__html_directive_ngfactory__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core_src_linker_view_container__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_html_directive__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__sh_context_sub_menu_directive_ngfactory__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_common_src_directives_ng_class_ngfactory__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_component_factory_resolver__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_core_src_change_detection_differs_iterable_differs__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_core_src_change_detection_differs_keyvalue_differs__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_common_src_directives_ng_class__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_ng2_right_click_menu_src_sh_context_sub_menu_directive__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if_ngfactory__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__angular_common_src_directives_ng_if__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_core_src_linker_query_list__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__angular_common_src_directives_ng_for_ngfactory__ = __webpack_require__(232);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_common_src_directives_ng_for__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__ = __webpack_require__(54);
-/* unused harmony export Wrapper_ShContextMenuComponent */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextMenuComponentNgFactory; });
-/* unused harmony export View_ShContextMenuComponent0 */
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var Wrapper_ShContextMenuComponent = (function () {
-    function Wrapper_ShContextMenuComponent(p0) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_component__["a" /* ShContextMenuComponent */](p0);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_1 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_2 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_ShContextMenuComponent.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_ShContextMenuComponent.prototype.ngOnDestroy = function () {
-        (this.subscription0 && this.subscription0.unsubscribe());
-    };
-    Wrapper_ShContextMenuComponent.prototype.check_position = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.position = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuComponent.prototype.check_items = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_1, currValue))) {
-            this._changed = true;
-            this.context.items = currValue;
-            this._expr_1 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuComponent.prototype.check_dataContext = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_2, currValue))) {
-            this._changed = true;
-            this.context.dataContext = currValue;
-            this._expr_2 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuComponent.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        if (!throwOnChange) {
-            if ((view.numberOfChecks === 0)) {
-                this.context.ngOnInit();
-            }
-        }
-        return changed;
-    };
-    Wrapper_ShContextMenuComponent.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_ShContextMenuComponent.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_ShContextMenuComponent.prototype.subscribe = function (view, _eventHandler, emit0) {
-        this._eventHandler = _eventHandler;
-        if (emit0) {
-            (this.subscription0 = this.context.onClose.subscribe(_eventHandler.bind(view, 'onClose')));
-        }
-    };
-    return Wrapper_ShContextMenuComponent;
-}());
-var renderType_ShContextMenuComponent_Host = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].None, [], {});
-var View_ShContextMenuComponent_Host0 = (function (_super) {
-    __extends(View_ShContextMenuComponent_Host0, _super);
-    function View_ShContextMenuComponent_Host0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_ShContextMenuComponent_Host0, renderType_ShContextMenuComponent_Host, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__["a" /* ViewType */].HOST, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-    }
-    View_ShContextMenuComponent_Host0.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["selectOrCreateRenderHostElement"](this.renderer, 'sh-context-menu', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], rootSelector, null);
-        this.compView_0 = new View_ShContextMenuComponent0(this.viewUtils, this, 0, this._el_0);
-        this._ShContextMenuComponent_0_3 = new Wrapper_ShContextMenuComponent(this.injectorGet(__WEBPACK_IMPORTED_MODULE_8_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */], this.parentIndex));
-        this.compView_0.create(this._ShContextMenuComponent_0_3.context);
-        this.init(this._el_0, (this.renderer.directRenderer ? null : [this._el_0]), null);
-        return new __WEBPACK_IMPORTED_MODULE_7__angular_core_src_linker_component_factory__["a" /* ComponentRef_ */](0, this, this._el_0, this._ShContextMenuComponent_0_3.context);
-    };
-    View_ShContextMenuComponent_Host0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_component__["a" /* ShContextMenuComponent */]) && (0 === requestNodeIndex))) {
-            return this._ShContextMenuComponent_0_3.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextMenuComponent_Host0.prototype.detectChangesInternal = function (throwOnChange) {
-        this._ShContextMenuComponent_0_3.ngDoCheck(this, this._el_0, throwOnChange);
-        if (!throwOnChange) {
-            if ((this.numberOfChecks === 0)) {
-                this._ShContextMenuComponent_0_3.context.ngAfterContentInit();
-            }
-        }
-        this.compView_0.internalDetectChanges(throwOnChange);
-    };
-    View_ShContextMenuComponent_Host0.prototype.destroyInternal = function () {
-        this.compView_0.destroy();
-        this._ShContextMenuComponent_0_3.ngOnDestroy();
-    };
-    View_ShContextMenuComponent_Host0.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._el_0, ctx);
-    };
-    return View_ShContextMenuComponent_Host0;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__["a" /* AppView */]));
-var ShContextMenuComponentNgFactory = new __WEBPACK_IMPORTED_MODULE_7__angular_core_src_linker_component_factory__["b" /* ComponentFactory */]('sh-context-menu', View_ShContextMenuComponent_Host0, __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_component__["a" /* ShContextMenuComponent */]);
-var styles_ShContextMenuComponent = ['.sh-context--container[_ngcontent-%COMP%]{\n    font-family: sans-serif;\n    position: fixed;\n    background: #ececec;\n    min-width: 150px;\n    border: 1px solid rgba(0,0,0,0.2);\n    border-radius: 3px;\n    box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);\n    z-index: 100;\n    color: black;\n  }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]{\n    list-style: none;\n    padding: 5px 0;\n    margin: 0;\n  }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]{\n      padding: 5px 10px 5px 15px;\n      transition: all 0.15s;\n  }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li.sh-context-divider[_ngcontent-%COMP%]{\n      height: 1px;\n      margin: 1px 1px 8px 1px;\n      overflow: hidden;\n      background-color: #ececec;\n      border-bottom: 1px solid #d0d0d0;\n      line-height: 10px;\n    }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li.sh-menu-item[_ngcontent-%COMP%]:hover{\n      cursor: pointer;\n      background: #4b8bec;\n      color: white;\n  }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li.sh-menu-disabled[_ngcontent-%COMP%]{\n      color: #d0d0d0;\n   }\n\n   .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li.sh-menu-item.sh-menu-hidden[_ngcontent-%COMP%]{\n      display: none;\n   }\n\n  .sh-context--container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li.sh-menu-disabled[_ngcontent-%COMP%]:hover{\n      cursor: not-allowed;\n      color: #d0d0d0;\n      background: #ececec;\n  }\n\n  .right-arrow[_ngcontent-%COMP%]{\n    float: right;\n    margin-left: 10px;\n    margin-top: 3px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n    border-left: 8px solid black;\n  }\n\n  .left-arrow[_ngcontent-%COMP%]{\n    float: left;\n    margin-right: 10px;\n    margin-top: 3px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n    border-right: 8px solid black;\n  }'];
-var View_ShContextMenuComponent2 = (function (_super) {
-    __extends(View_ShContextMenuComponent2, _super);
-    function View_ShContextMenuComponent2(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_ShContextMenuComponent2, renderType_ShContextMenuComponent, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
-    }
-    View_ShContextMenuComponent2.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'div', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._HtmlDirective_0_3 = new __WEBPACK_IMPORTED_MODULE_9__html_directive_ngfactory__["a" /* Wrapper_HtmlDirective */](new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_0));
-        this._text_1 = this.renderer.createText(this._el_0, '\n              ', null);
-        this.init(this._el_0, (this.renderer.directRenderer ? null : [
-            this._el_0,
-            this._text_1
-        ]), null);
-        return null;
-    };
-    View_ShContextMenuComponent2.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_html_directive__["a" /* HtmlDirective */]) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) {
-            return this._HtmlDirective_0_3.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextMenuComponent2.prototype.detectChangesInternal = function (throwOnChange) {
-        var currVal_0_0_0 = this.parentView.context.$implicit.label;
-        this._HtmlDirective_0_3.check_content(currVal_0_0_0, throwOnChange, false);
-        this._HtmlDirective_0_3.ngDoCheck(this, this._el_0, throwOnChange);
-        if (!throwOnChange) {
-            if ((this.numberOfChecks === 0)) {
-                this._HtmlDirective_0_3.context.ngAfterContentInit();
-            }
-        }
-    };
-    View_ShContextMenuComponent2.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._el_0, ctx);
-    };
-    return View_ShContextMenuComponent2;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__["a" /* AppView */]));
-var View_ShContextMenuComponent3 = (function (_super) {
-    __extends(View_ShContextMenuComponent3, _super);
-    function View_ShContextMenuComponent3(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_ShContextMenuComponent3, renderType_ShContextMenuComponent, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
-        this._map_9 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["pureProxy2"](function (p0, p1) {
-            return {
-                'right-arrow': p0,
-                'left-arrow': p1
-            };
-        });
-    }
-    View_ShContextMenuComponent3.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'div', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._vc_0 = new __WEBPACK_IMPORTED_MODULE_10__angular_core_src_linker_view_container__["a" /* ViewContainer */](0, null, this, this._el_0);
-        this._ShContextSubMenuDirective_0_5 = new __WEBPACK_IMPORTED_MODULE_13__sh_context_sub_menu_directive_ngfactory__["a" /* Wrapper_ShContextSubMenuDirective */](this._vc_0.vcRef, new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_0), this.parentView.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_15__angular_core_src_linker_component_factory_resolver__["a" /* ComponentFactoryResolver */], this.parentView.parentView.parentIndex), this.parentView.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_8_ng2_right_click_menu_src_sh_context_service__["a" /* ShContextService */], this.parentView.parentView.parentIndex));
-        this._HtmlDirective_0_6 = new __WEBPACK_IMPORTED_MODULE_9__html_directive_ngfactory__["a" /* Wrapper_HtmlDirective */](new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_0));
-        this._text_1 = this.renderer.createText(this._el_0, '\n               ', null);
-        this._el_2 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_0, 'div', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._NgClass_2_3 = new __WEBPACK_IMPORTED_MODULE_14__angular_common_src_directives_ng_class_ngfactory__["a" /* Wrapper_NgClass */](this.parentView.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_16__angular_core_src_change_detection_differs_iterable_differs__["a" /* IterableDiffers */], this.parentView.parentView.parentIndex), this.parentView.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_17__angular_core_src_change_detection_differs_keyvalue_differs__["a" /* KeyValueDiffers */], this.parentView.parentView.parentIndex), new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_2), this.renderer);
-        this._text_3 = this.renderer.createText(this._el_0, '\n              ', null);
-        this._el_4 = this.renderer.createTemplateAnchor(null, null);
-        var disposable_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_0, new __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["InlineArray4"](4, 'closeSubMenu', null, 'mouseover', null), this.eventHandler(this.handleEvent_0));
-        this._ShContextSubMenuDirective_0_5.subscribe(this, this.eventHandler(this.handleEvent_0), true);
-        this.init(this._el_4, (this.renderer.directRenderer ? null : [
-            this._el_0,
-            this._text_1,
-            this._el_2,
-            this._text_3
-        ]), [disposable_0]);
-        return null;
-    };
-    View_ShContextMenuComponent3.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_18__angular_common_src_directives_ng_class__["a" /* NgClass */]) && (2 === requestNodeIndex))) {
-            return this._NgClass_2_3.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_19_ng2_right_click_menu_src_sh_context_sub_menu_directive__["a" /* ShContextSubMenuDirective */]) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) {
-            return this._ShContextSubMenuDirective_0_5.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_12_ng2_right_click_menu_src_html_directive__["a" /* HtmlDirective */]) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) {
-            return this._HtmlDirective_0_6.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextMenuComponent3.prototype.detectChangesInternal = function (throwOnChange) {
-        var currVal_0_0_0 = this.parentView.context.$implicit.subMenuItems;
-        this._ShContextSubMenuDirective_0_5.check_menuItems(currVal_0_0_0, throwOnChange, false);
-        var currVal_0_0_1 = this.parentView.parentView.context.dataContext;
-        this._ShContextSubMenuDirective_0_5.check_dataContext(currVal_0_0_1, throwOnChange, false);
-        this._ShContextSubMenuDirective_0_5.ngDoCheck(this, this._el_0, throwOnChange);
-        var currVal_0_1_0 = this.parentView.context.$implicit.label;
-        this._HtmlDirective_0_6.check_content(currVal_0_1_0, throwOnChange, false);
-        this._HtmlDirective_0_6.ngDoCheck(this, this._el_0, throwOnChange);
-        var currVal_2_0_0 = this._map_9(!this.parentView.parentView.context.options.rtl, this.parentView.parentView.context.options.rtl);
-        this._NgClass_2_3.check_ngClass(currVal_2_0_0, throwOnChange, false);
-        this._NgClass_2_3.ngDoCheck(this, this._el_2, throwOnChange);
-        this._vc_0.detectChangesInNestedViews(throwOnChange);
-        if (!throwOnChange) {
-            if ((this.numberOfChecks === 0)) {
-                this._HtmlDirective_0_6.context.ngAfterContentInit();
-            }
-        }
-    };
-    View_ShContextMenuComponent3.prototype.destroyInternal = function () {
-        this._vc_0.destroyNestedViews();
-        this._ShContextSubMenuDirective_0_5.ngOnDestroy();
-    };
-    View_ShContextMenuComponent3.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._vc_0.nativeElement, ctx);
-        this._vc_0.visitNestedViewRootNodes(cb, ctx);
-        cb(this._el_4, ctx);
-    };
-    View_ShContextMenuComponent3.prototype.handleEvent_0 = function (eventName, $event) {
-        this.markPathToRootAsCheckOnce();
-        var result = true;
-        result = (this._ShContextSubMenuDirective_0_5.handleEvent(eventName, $event) && result);
-        if ((eventName == 'closeSubMenu')) {
-            var pd_sub_0 = (this.parentView.parentView.context.close() !== false);
-            result = (pd_sub_0 && result);
-        }
-        return result;
-    };
-    return View_ShContextMenuComponent3;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__["a" /* AppView */]));
-var View_ShContextMenuComponent1 = (function (_super) {
-    __extends(View_ShContextMenuComponent1, _super);
-    function View_ShContextMenuComponent1(viewUtils, parentView, parentIndex, parentElement, declaredViewContainer) {
-        _super.call(this, View_ShContextMenuComponent1, renderType_ShContextMenuComponent, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__["a" /* ViewType */].EMBEDDED, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways, declaredViewContainer);
-        this._map_13 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["pureProxy4"](function (p0, p1, p2, p3) {
-            return {
-                'sh-menu-item': p0,
-                'sh-context-divider': p1,
-                'sh-menu-disabled': p2,
-                'sh-menu-hidden': p3
-            };
-        });
-    }
-    View_ShContextMenuComponent1.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, null, 'li', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._NgClass_0_3 = new __WEBPACK_IMPORTED_MODULE_14__angular_common_src_directives_ng_class_ngfactory__["a" /* Wrapper_NgClass */](this.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_16__angular_core_src_change_detection_differs_iterable_differs__["a" /* IterableDiffers */], this.parentView.parentIndex), this.parentView.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_17__angular_core_src_change_detection_differs_keyvalue_differs__["a" /* KeyValueDiffers */], this.parentView.parentIndex), new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_0), this.renderer);
-        this._text_1 = this.renderer.createText(this._el_0, '\n              ', null);
-        this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0, null);
-        this._vc_2 = new __WEBPACK_IMPORTED_MODULE_10__angular_core_src_linker_view_container__["a" /* ViewContainer */](2, 0, this, this._anchor_2);
-        this._TemplateRef_2_5 = new __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 2, this._anchor_2);
-        this._NgIf_2_6 = new __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_2.vcRef, this._TemplateRef_2_5);
-        this._text_3 = this.renderer.createText(this._el_0, '\n              ', null);
-        this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0, null);
-        this._vc_4 = new __WEBPACK_IMPORTED_MODULE_10__angular_core_src_linker_view_container__["a" /* ViewContainer */](4, 0, this, this._anchor_4);
-        this._TemplateRef_4_5 = new __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 4, this._anchor_4);
-        this._NgIf_4_6 = new __WEBPACK_IMPORTED_MODULE_20__angular_common_src_directives_ng_if_ngfactory__["a" /* Wrapper_NgIf */](this._vc_4.vcRef, this._TemplateRef_4_5);
-        this._text_5 = this.renderer.createText(this._el_0, '\n          ', null);
-        var disposable_0 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_0, new __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["InlineArray2"](2, 'click', null), this.eventHandler(this.handleEvent_0));
-        this.init(this._el_0, (this.renderer.directRenderer ? null : [
-            this._el_0,
-            this._text_1,
-            this._anchor_2,
-            this._text_3,
-            this._anchor_4,
-            this._text_5
-        ]), [disposable_0]);
-        return null;
-    };
-    View_ShContextMenuComponent1.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (2 === requestNodeIndex))) {
-            return this._TemplateRef_2_5;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_22__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (2 === requestNodeIndex))) {
-            return this._NgIf_2_6.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (4 === requestNodeIndex))) {
-            return this._TemplateRef_4_5;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_22__angular_common_src_directives_ng_if__["a" /* NgIf */]) && (4 === requestNodeIndex))) {
-            return this._NgIf_4_6.context;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_18__angular_common_src_directives_ng_class__["a" /* NgClass */]) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) {
-            return this._NgClass_0_3.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextMenuComponent1.prototype.detectChangesInternal = function (throwOnChange) {
-        var currVal_0_0_0 = this._map_13(!this.context.$implicit.divider, this.context.$implicit.divider, this.parentView.context.isItemDisabled(this.context.$implicit), !this.parentView.context.isItemVisible(this.context.$implicit));
-        this._NgClass_0_3.check_ngClass(currVal_0_0_0, throwOnChange, false);
-        this._NgClass_0_3.ngDoCheck(this, this._el_0, throwOnChange);
-        var currVal_2_0_0 = (!this.context.$implicit.divider && !this.context.$implicit.subMenu);
-        this._NgIf_2_6.check_ngIf(currVal_2_0_0, throwOnChange, false);
-        this._NgIf_2_6.ngDoCheck(this, this._anchor_2, throwOnChange);
-        var currVal_4_0_0 = this.context.$implicit.subMenu;
-        this._NgIf_4_6.check_ngIf(currVal_4_0_0, throwOnChange, false);
-        this._NgIf_4_6.ngDoCheck(this, this._anchor_4, throwOnChange);
-        this._vc_2.detectChangesInNestedViews(throwOnChange);
-        this._vc_4.detectChangesInNestedViews(throwOnChange);
-    };
-    View_ShContextMenuComponent1.prototype.destroyInternal = function () {
-        this._vc_2.destroyNestedViews();
-        this._vc_4.destroyNestedViews();
-    };
-    View_ShContextMenuComponent1.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._el_0, ctx);
-    };
-    View_ShContextMenuComponent1.prototype.createEmbeddedViewInternal = function (nodeIndex) {
-        if ((nodeIndex == 2)) {
-            return new View_ShContextMenuComponent2(this.viewUtils, this, 2, this._anchor_2, this._vc_2);
-        }
-        if ((nodeIndex == 4)) {
-            return new View_ShContextMenuComponent3(this.viewUtils, this, 4, this._anchor_4, this._vc_4);
-        }
-        return null;
-    };
-    View_ShContextMenuComponent1.prototype.handleEvent_0 = function (eventName, $event) {
-        this.markPathToRootAsCheckOnce();
-        var result = true;
-        if ((eventName == 'click')) {
-            var pd_sub_0 = (this.parentView.context.onClick(this.context.$implicit) !== false);
-            result = (pd_sub_0 && result);
-        }
-        return result;
-    };
-    return View_ShContextMenuComponent1;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__["a" /* AppView */]));
-var renderType_ShContextMenuComponent = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].Emulated, styles_ShContextMenuComponent, {});
-var View_ShContextMenuComponent0 = (function (_super) {
-    __extends(View_ShContextMenuComponent0, _super);
-    function View_ShContextMenuComponent0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_ShContextMenuComponent0, renderType_ShContextMenuComponent, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_linker_view_type__["a" /* ViewType */].COMPONENT, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_6__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-        this._expr_13 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_14 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_15 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    View_ShContextMenuComponent0.prototype.createInternal = function (rootSelector) {
-        var parentRenderNode = this.renderer.createViewRoot(this.parentElement);
-        this._viewQuery_childRef_0 = new __WEBPACK_IMPORTED_MODULE_23__angular_core_src_linker_query_list__["a" /* QueryList */]();
-        this._text_0 = this.renderer.createText(parentRenderNode, '\n    ', null);
-        this._el_1 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'div', new __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'sh-context--container'), null);
-        this._text_2 = this.renderer.createText(this._el_1, '\n      ', null);
-        this._el_3 = __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, this._el_1, 'ul', __WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], null);
-        this._text_4 = this.renderer.createText(this._el_3, '\n          ', null);
-        this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3, null);
-        this._vc_5 = new __WEBPACK_IMPORTED_MODULE_10__angular_core_src_linker_view_container__["a" /* ViewContainer */](5, 3, this, this._anchor_5);
-        this._TemplateRef_5_5 = new __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["a" /* TemplateRef_ */](this, 5, this._anchor_5);
-        this._NgFor_5_6 = new __WEBPACK_IMPORTED_MODULE_24__angular_common_src_directives_ng_for_ngfactory__["a" /* Wrapper_NgFor */](this._vc_5.vcRef, this._TemplateRef_5_5, this.parentView.injectorGet(__WEBPACK_IMPORTED_MODULE_16__angular_core_src_change_detection_differs_iterable_differs__["a" /* IterableDiffers */], this.parentIndex), this.ref);
-        this._text_6 = this.renderer.createText(this._el_3, '\n      ', null);
-        this._text_7 = this.renderer.createText(this._el_1, '\n    ', null);
-        this._text_8 = this.renderer.createText(parentRenderNode, '\n', null);
-        this._viewQuery_childRef_0.reset([new __WEBPACK_IMPORTED_MODULE_11__angular_core_src_linker_element_ref__["a" /* ElementRef */](this._el_1)]);
-        this.context.childRef = this._viewQuery_childRef_0.first;
-        this.init(null, (this.renderer.directRenderer ? null : [
-            this._text_0,
-            this._el_1,
-            this._text_2,
-            this._el_3,
-            this._text_4,
-            this._anchor_5,
-            this._text_6,
-            this._text_7,
-            this._text_8
-        ]), null);
-        return null;
-    };
-    View_ShContextMenuComponent0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_21__angular_core_src_linker_template_ref__["b" /* TemplateRef */]) && (5 === requestNodeIndex))) {
-            return this._TemplateRef_5_5;
-        }
-        if (((token === __WEBPACK_IMPORTED_MODULE_25__angular_common_src_directives_ng_for__["a" /* NgFor */]) && (5 === requestNodeIndex))) {
-            return this._NgFor_5_6.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextMenuComponent0.prototype.detectChangesInternal = function (throwOnChange) {
-        var currVal_5_0_0 = this.context.items;
-        this._NgFor_5_6.check_ngForOf(currVal_5_0_0, throwOnChange, false);
-        this._NgFor_5_6.ngDoCheck(this, this._anchor_5, throwOnChange);
-        this._vc_5.detectChangesInNestedViews(throwOnChange);
-        var currVal_13 = (this.context.position.left + 'px');
-        if (__WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_13, currVal_13)) {
-            this.renderer.setElementStyle(this._el_1, 'left', ((this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_13) == null) ? null : this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_13).toString()));
-            this._expr_13 = currVal_13;
-        }
-        var currVal_14 = (this.context.position.top + 'px');
-        if (__WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_14, currVal_14)) {
-            this.renderer.setElementStyle(this._el_1, 'top', ((this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_14) == null) ? null : this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_14).toString()));
-            this._expr_14 = currVal_14;
-        }
-        var currVal_15 = (this.context.options.rtl ? 'rtl' : 'ltr');
-        if (__WEBPACK_IMPORTED_MODULE_3__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_15, currVal_15)) {
-            this.renderer.setElementStyle(this._el_1, 'direction', ((this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_15) == null) ? null : this.viewUtils.sanitizer.sanitize(__WEBPACK_IMPORTED_MODULE_26__angular_core_src_security__["b" /* SecurityContext */].STYLE, currVal_15).toString()));
-            this._expr_15 = currVal_15;
-        }
-    };
-    View_ShContextMenuComponent0.prototype.destroyInternal = function () {
-        this._vc_5.destroyNestedViews();
-    };
-    View_ShContextMenuComponent0.prototype.createEmbeddedViewInternal = function (nodeIndex) {
-        if ((nodeIndex == 5)) {
-            return new View_ShContextMenuComponent1(this.viewUtils, this, 5, this._anchor_5, this._vc_5);
-        }
-        return null;
-    };
-    return View_ShContextMenuComponent0;
-}(__WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view__["a" /* AppView */]));
-//# sourceMappingURL=sh-context-menu.component.ngfactory.js.map
-
-/***/ }),
-
-/***/ 236:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_directive__ = __webpack_require__(114);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_ShContextMenuDirective; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_ShContextMenuDirective = (function () {
-    function Wrapper_ShContextMenuDirective(p0, p1, p2) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_menu_directive__["a" /* ShContextMenuDirective */](p0, p1, p2);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_1 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_2 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_ShContextMenuDirective.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_ShContextMenuDirective.prototype.ngOnDestroy = function () {
-    };
-    Wrapper_ShContextMenuDirective.prototype.check_menuItems = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.menuItems = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuDirective.prototype.check_dataContext = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_1, currValue))) {
-            this._changed = true;
-            this.context.dataContext = currValue;
-            this._expr_1 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuDirective.prototype.check_options = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_2, currValue))) {
-            this._changed = true;
-            this.context.options = currValue;
-            this._expr_2 = currValue;
-        }
-    };
-    Wrapper_ShContextMenuDirective.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        return changed;
-    };
-    Wrapper_ShContextMenuDirective.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_ShContextMenuDirective.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        if ((eventName == 'contextmenu')) {
-            var pd_sub_0 = (this.context.onClick($event) !== false);
-            result = (pd_sub_0 && result);
-        }
-        return result;
-    };
-    Wrapper_ShContextMenuDirective.prototype.subscribe = function (view, _eventHandler) {
-        this._eventHandler = _eventHandler;
-    };
-    return Wrapper_ShContextMenuDirective;
-}());
-//# sourceMappingURL=sh-context-menu.directive.ngfactory.js.map
-
-/***/ }),
-
-/***/ 237:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_overlay_component__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__ = __webpack_require__(26);
-/* unused harmony export Wrapper_ShContextOverlayComponent */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShContextOverlayComponentNgFactory; });
-/* unused harmony export View_ShContextOverlayComponent0 */
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-
-
-
-
-
-
-
-var Wrapper_ShContextOverlayComponent = (function () {
-    function Wrapper_ShContextOverlayComponent() {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_overlay_component__["a" /* ShContextOverlayComponent */]();
-    }
-    Wrapper_ShContextOverlayComponent.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_ShContextOverlayComponent.prototype.ngOnDestroy = function () {
-        (this.subscription0 && this.subscription0.unsubscribe());
-    };
-    Wrapper_ShContextOverlayComponent.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        return changed;
-    };
-    Wrapper_ShContextOverlayComponent.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_ShContextOverlayComponent.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        return result;
-    };
-    Wrapper_ShContextOverlayComponent.prototype.subscribe = function (view, _eventHandler, emit0) {
-        this._eventHandler = _eventHandler;
-        if (emit0) {
-            (this.subscription0 = this.context.onClick.subscribe(_eventHandler.bind(view, 'onClick')));
-        }
-    };
-    return Wrapper_ShContextOverlayComponent;
-}());
-var renderType_ShContextOverlayComponent_Host = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].None, [], {});
-var View_ShContextOverlayComponent_Host0 = (function (_super) {
-    __extends(View_ShContextOverlayComponent_Host0, _super);
-    function View_ShContextOverlayComponent_Host0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_ShContextOverlayComponent_Host0, renderType_ShContextOverlayComponent_Host, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].HOST, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-    }
-    View_ShContextOverlayComponent_Host0.prototype.createInternal = function (rootSelector) {
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["selectOrCreateRenderHostElement"](this.renderer, 'sh-context-overlay', __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["EMPTY_INLINE_ARRAY"], rootSelector, null);
-        this.compView_0 = new View_ShContextOverlayComponent0(this.viewUtils, this, 0, this._el_0);
-        this._ShContextOverlayComponent_0_3 = new Wrapper_ShContextOverlayComponent();
-        this.compView_0.create(this._ShContextOverlayComponent_0_3.context);
-        this.init(this._el_0, (this.renderer.directRenderer ? null : [this._el_0]), null);
-        return new __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__["a" /* ComponentRef_ */](0, this, this._el_0, this._ShContextOverlayComponent_0_3.context);
-    };
-    View_ShContextOverlayComponent_Host0.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_overlay_component__["a" /* ShContextOverlayComponent */]) && (0 === requestNodeIndex))) {
-            return this._ShContextOverlayComponent_0_3.context;
-        }
-        return notFoundResult;
-    };
-    View_ShContextOverlayComponent_Host0.prototype.detectChangesInternal = function (throwOnChange) {
-        this._ShContextOverlayComponent_0_3.ngDoCheck(this, this._el_0, throwOnChange);
-        this.compView_0.internalDetectChanges(throwOnChange);
-    };
-    View_ShContextOverlayComponent_Host0.prototype.destroyInternal = function () {
-        this.compView_0.destroy();
-        this._ShContextOverlayComponent_0_3.ngOnDestroy();
-    };
-    View_ShContextOverlayComponent_Host0.prototype.visitRootNodesInternal = function (cb, ctx) {
-        cb(this._el_0, ctx);
-    };
-    return View_ShContextOverlayComponent_Host0;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-var ShContextOverlayComponentNgFactory = new __WEBPACK_IMPORTED_MODULE_6__angular_core_src_linker_component_factory__["b" /* ComponentFactory */]('sh-context-overlay', View_ShContextOverlayComponent_Host0, __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_overlay_component__["a" /* ShContextOverlayComponent */]);
-var styles_ShContextOverlayComponent = ['.sh-context-overlay[_ngcontent-%COMP%]{\n      position: fixed;\n      top:0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 99;\n      background-color: transparent;\n   }'];
-var renderType_ShContextOverlayComponent = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderComponentType"]('', 0, __WEBPACK_IMPORTED_MODULE_3__angular_core_src_metadata_view__["b" /* ViewEncapsulation */].Emulated, styles_ShContextOverlayComponent, {});
-var View_ShContextOverlayComponent0 = (function (_super) {
-    __extends(View_ShContextOverlayComponent0, _super);
-    function View_ShContextOverlayComponent0(viewUtils, parentView, parentIndex, parentElement) {
-        _super.call(this, View_ShContextOverlayComponent0, renderType_ShContextOverlayComponent, __WEBPACK_IMPORTED_MODULE_4__angular_core_src_linker_view_type__["a" /* ViewType */].COMPONENT, viewUtils, parentView, parentIndex, parentElement, __WEBPACK_IMPORTED_MODULE_5__angular_core_src_change_detection_constants__["b" /* ChangeDetectorStatus */].CheckAlways);
-    }
-    View_ShContextOverlayComponent0.prototype.createInternal = function (rootSelector) {
-        var parentRenderNode = this.renderer.createViewRoot(this.parentElement);
-        this._el_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["createRenderElement"](this.renderer, parentRenderNode, 'div', new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'class', 'sh-context-overlay'), null);
-        var disposable_0 = __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["subscribeToRenderElement"](this, this._el_0, new __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["InlineArray2"](2, 'mousedown', null), this.eventHandler(this.handleEvent_0));
-        this.init(null, (this.renderer.directRenderer ? null : [this._el_0]), [disposable_0]);
-        return null;
-    };
-    View_ShContextOverlayComponent0.prototype.handleEvent_0 = function (eventName, $event) {
-        this.markPathToRootAsCheckOnce();
-        var result = true;
-        if ((eventName == 'mousedown')) {
-            var pd_sub_0 = (this.context.onClick.emit() !== false);
-            result = (pd_sub_0 && result);
-        }
-        return result;
-    };
-    return View_ShContextOverlayComponent0;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_core_src_linker_view__["a" /* AppView */]));
-//# sourceMappingURL=sh-context-overlay.component.ngfactory.js.map
-
-/***/ }),
-
-/***/ 238:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_sub_menu_directive__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Wrapper_ShContextSubMenuDirective; });
-/**
- * @fileoverview This file is generated by the Angular 2 template compiler.
- * Do not edit.
- * @suppress {suspiciousCode,uselessCode,missingProperties}
- */
-/* tslint:disable */
-
-
-
-var Wrapper_ShContextSubMenuDirective = (function () {
-    function Wrapper_ShContextSubMenuDirective(p0, p1, p2, p3) {
-        this._changed = false;
-        this.context = new __WEBPACK_IMPORTED_MODULE_0_ng2_right_click_menu_src_sh_context_sub_menu_directive__["a" /* ShContextSubMenuDirective */](p0, p1, p2, p3);
-        this._expr_0 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-        this._expr_1 = __WEBPACK_IMPORTED_MODULE_1__angular_core_src_change_detection_change_detection_util__["b" /* UNINITIALIZED */];
-    }
-    Wrapper_ShContextSubMenuDirective.prototype.ngOnDetach = function (view, componentView, el) {
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.ngOnDestroy = function () {
-        (this.subscription0 && this.subscription0.unsubscribe());
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.check_menuItems = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_0, currValue))) {
-            this._changed = true;
-            this.context.menuItems = currValue;
-            this._expr_0 = currValue;
-        }
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.check_dataContext = function (currValue, throwOnChange, forceUpdate) {
-        if ((forceUpdate || __WEBPACK_IMPORTED_MODULE_2__angular_core_src_linker_view_utils__["checkBinding"](throwOnChange, this._expr_1, currValue))) {
-            this._changed = true;
-            this.context.dataContext = currValue;
-            this._expr_1 = currValue;
-        }
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.ngDoCheck = function (view, el, throwOnChange) {
-        var changed = this._changed;
-        this._changed = false;
-        if (!throwOnChange) {
-            if ((view.numberOfChecks === 0)) {
-                this.context.ngOnInit();
-            }
-        }
-        return changed;
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.checkHost = function (view, componentView, el, throwOnChange) {
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.handleEvent = function (eventName, $event) {
-        var result = true;
-        if ((eventName == 'mouseover')) {
-            var pd_sub_0 = (this.context.onMouseOver($event) !== false);
-            result = (pd_sub_0 && result);
-        }
-        return result;
-    };
-    Wrapper_ShContextSubMenuDirective.prototype.subscribe = function (view, _eventHandler, emit0) {
-        this._eventHandler = _eventHandler;
-        if (emit0) {
-            (this.subscription0 = this.context.closeSubMenu.subscribe(_eventHandler.bind(view, 'closeSubMenu')));
-        }
-    };
-    return Wrapper_ShContextSubMenuDirective;
-}());
-//# sourceMappingURL=sh-context-sub-menu.directive.ngfactory.js.map
-
-/***/ }),
-
-/***/ 239:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 // import { IShContextMenuItem } from '../../../context-menu/src/sh-context-item';
 // import { IShContextOptions } from '../../../context-menu/src/sh-context-options';
 var AppComponent = (function () {
@@ -1742,7 +631,8 @@ var AppComponent = (function () {
                             {
                                 label: 'Edit',
                                 onClick: this.clickEvent
-                            }]
+                            }
+                        ]
                     }
                 ]
             },
@@ -1796,41 +686,80 @@ var AppComponent = (function () {
                             {
                                 label: 'ערוך',
                                 onClick: this.clickEvent
-                            }]
+                            }
+                        ]
                     }
                 ]
             }
         ];
         this.options = {
-            rtl: true
+            rtl: true,
+            theme: 'dark'
         };
     }
     AppComponent.prototype.clickEvent = function ($event) {
         console.log('clicked ', $event);
     };
     ;
-    AppComponent.ctorParameters = function () { return []; };
     return AppComponent;
 }());
+AppComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Component */])({
+        selector: 'app-root',
+        encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+        template: __webpack_require__("../../../../../src/app/app.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/app.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], AppComponent);
+
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 240:
+/***/ "../../../../../src/app/app.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu__ = __webpack_require__("../../../../../../index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     return AppModule;
 }());
+AppModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_2_ng2_right_click_menu__["a" /* ShContextMenuModule */]
+        ],
+        providers: [],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
+    })
+], AppModule);
+
 //# sourceMappingURL=app.module.js.map
 
 /***/ }),
 
-/***/ 241:
+/***/ "../../../../../src/environments/environment.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1839,6 +768,7 @@ var AppModule = (function () {
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false
 };
@@ -1846,13 +776,34 @@ var environment = {
 
 /***/ }),
 
-/***/ 308:
+/***/ "../../../../../src/main.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/@angular/platform-browser-dynamic.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("../../../../../src/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* enableProdMode */])();
+}
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(171);
+module.exports = __webpack_require__("../../../../../src/main.ts");
 
 
 /***/ })
 
-},[308]);
+},[0]);
 //# sourceMappingURL=main.bundle.js.map
